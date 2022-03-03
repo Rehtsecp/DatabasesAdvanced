@@ -14,8 +14,8 @@ A couple of packages should be installed before running this program.
 </ul>
 
 ### Usage
-<ol>
-    <li>Download > BlockchainScraper.py</li>
-    <li>Open a terminal on your device and go to the directory where BlockchainScraper.py is located.</li>
-    > <li>Type </li>
-</ol>
+Download **BlockchainScraper.py**
+Open a terminal on your device and and go to the directory where the python program is located
+Type > python BlockchainScraper.py
+
+It should now be running and will be writing to **transaction.log** (located in the same directory as the program) every minute.
