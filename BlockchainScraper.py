@@ -77,8 +77,9 @@ def scrape_blockchain():
     }
 
     # Writing to a transaction log
-    with open('transaction.log', 'w') as file:
+    with open('transaction.log', 'a') as file:
         file.write(json.dumps(transaction_dict))
+        file.write('\n')
     print('Added to transaction.log')
 
 # This will allow the program to only run when in use, and will scrape the website every minute

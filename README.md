@@ -12,3 +12,10 @@ A couple of packages should be installed before running this program.
     <li>json</li>
     <li>time</li>
 </ul>
+
+### Usage
+<ol>
+    <li>Download > BlockchainScraper.py</li>
+    <li>Open a terminal on your device and go to the directory where BlockchainScraper.py is located.</li>
+    > <li>Type </li>
+</ol>
