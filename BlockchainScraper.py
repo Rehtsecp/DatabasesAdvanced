@@ -1,7 +1,5 @@
 from bs4 import BeautifulSoup as bs
-import requests
-import json
-import time
+import requests, json, time
 
 def scrape_blockchain():
     html_text = requests.get('https://www.blockchain.com/btc/unconfirmed-transactions').text
@@ -78,10 +76,12 @@ def scrape_blockchain():
     'Amount (USD)': max_usd_amount_data(x)
     }
 
+    # Writing to a transaction log
     with open('transaction.log', 'w') as file:
         file.write(json.dumps(transaction_dict))
     print('Added to transaction.log')
 
+# This will allow the program to only run when in use, and will scrape the website every minute
 if __name__ == '__main__':
     while True:
         scrape_blockchain()
