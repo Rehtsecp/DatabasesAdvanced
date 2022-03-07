@@ -1,6 +1,15 @@
 from bs4 import BeautifulSoup as bs
-from pymongo import mongo
+import pymongo as mongo
 import requests, json, time
+
+# Connect to MongoDB
+client = mongo.MongoClient ('mongodb://127.0.0.1:27017')
+
+# Creating a new database
+transaction_db = client['Blockchain']
+
+# Creating a collection
+collection_name = transaction_db['unconfirmed_transactions']
 
 def scrape_blockchain():
     html_text = requests.get('https://www.blockchain.com/btc/unconfirmed-transactions').text
@@ -78,15 +87,19 @@ def scrape_blockchain():
     }
 
     # Writing to a transaction log
-    with open('transaction.log', 'a') as file:
-        file.write(json.dumps(transaction_dict))
-        file.write('\n')
-    print('Added to transaction.log')
+    #with open('transaction.log', 'a') as file:
+    #    file.write(json.dumps(transaction_dict))
+    #    file.write('\n')
+    #print('Added to transaction.log')
+
+    # This will insert the current highest transaction into MongoDB
+    collection_name.insert_one(transaction_dict)
 
 # This will allow the program to only run when in use, and will scrape the website every minute
 if __name__ == '__main__':
     while True:
         scrape_blockchain()
+        print(f'Inserted in MongoDB: "{transaction_db.name}"')
         wait_time = 60
         print(f'Waiting {wait_time} seconds...')
         time.sleep(wait_time)
