@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup as bs
+from pymongo import mongo
 import requests, json, time
 
 def scrape_blockchain():
