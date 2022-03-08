@@ -1,15 +1,21 @@
+from asyncio.trsock import TransportSocket
+from readline import read_history_file
 from bs4 import BeautifulSoup as bs
 import pymongo as mongo
-import requests, json, time
+import requests, json, time, redis, subprocess
+
+# Runs setup.sh
+rc = subprocess.call("./setup.sh")
 
 # Connect to MongoDB
 client = mongo.MongoClient ('mongodb://127.0.0.1:27017')
-
 # Creating a new database
 transaction_db = client['Blockchain']
-
 # Creating a collection
 collection_name = transaction_db['unconfirmed_transactions']
+
+# Connect to Redis
+r = redis.Redis()
 
 def scrape_blockchain():
     html_text = requests.get('https://www.blockchain.com/btc/unconfirmed-transactions').text
@@ -91,6 +97,9 @@ def scrape_blockchain():
     #    file.write(json.dumps(transaction_dict))
     #    file.write('\n')
     #print('Added to transaction.log')
+
+    # This will set the keys
+    r.mset(transaction_dict)
 
     # This will insert the current highest transaction into MongoDB
     collection_name.insert_one(transaction_dict)
