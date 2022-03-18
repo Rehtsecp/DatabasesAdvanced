@@ -104,6 +104,8 @@ def scrape_blockchain():
     # This will insert the current highest transaction into MongoDB
     collection_name.insert_one(transaction_dict)
 
+    r.expire(transaction_dict, 60)
+
 # This will allow the program to only run when in use, and will scrape the website every minute
 if __name__ == '__main__':
     while True:

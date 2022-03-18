@@ -1,5 +1,3 @@
-from asyncio.trsock import TransportSocket
-from readline import read_history_file
 from bs4 import BeautifulSoup as bs
 import pymongo as mongo
 import requests, json, time, redis, subprocess
