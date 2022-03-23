@@ -6,14 +6,14 @@ import requests, json, time, redis, subprocess
 #rc = subprocess.call('./setup.sh', shell=True)
 
 # Connect to MongoDB
-client = mongo.MongoClient ('mongodb://127.0.0.1:27017')
+client = mongo.MongoClient ('mongodb://localhost:27017')
 # Creating a new database
 transaction_db = client['Blockchain']
 # Creating a collection
 collection_name = transaction_db['unconfirmed_transactions']
 
 # Connect to Redis
-r = redis.Redis()
+r = redis.Redis(host='localhost', port=6379)
 
 def scrape_blockchain():
     html_text = requests.get('https://www.blockchain.com/btc/unconfirmed-transactions').text
@@ -98,6 +98,7 @@ def scrape_blockchain():
 
     # This will set the keys
     r.mset(transaction_dict)
+    # Will expire the key in 60 seconds
 
     # This will insert the current highest transaction into MongoDB
     collection_name.insert_one(transaction_dict)
