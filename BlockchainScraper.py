@@ -81,7 +81,6 @@ def scrape_blockchain():
         max_usd_amount = usd_amount_list[x]
         return max_usd_amount
 
-
     # Storing the highest transaction in an dictionary
     transaction_dict = {
     'Hash': hash_data(x),
@@ -98,7 +97,6 @@ def scrape_blockchain():
 
     # This will set the keys
     r.mset(transaction_dict)
-    # Will expire the key in 60 seconds
 
     # This will insert the current highest transaction into MongoDB
     collection_name.insert_one(transaction_dict)
