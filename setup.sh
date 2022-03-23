@@ -7,3 +7,7 @@ sudo systemctl start mongod
 cd /redis-stable/src
 redis-server
 redis-cli ping
+
+#Docker setup
+#docker start dba_mong
+#docker start dba_redis

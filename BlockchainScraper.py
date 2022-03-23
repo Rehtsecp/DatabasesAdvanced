@@ -3,7 +3,7 @@ import pymongo as mongo
 import requests, json, time, redis, subprocess
 
 # Runs setup.sh
-rc = subprocess.call("./setup.sh")
+#rc = subprocess.call('./setup.sh', shell=True)
 
 # Connect to MongoDB
 client = mongo.MongoClient ('mongodb://127.0.0.1:27017')
