@@ -105,7 +105,7 @@ def scrape_blockchain():
 if __name__ == '__main__':
     while True:
         scrape_blockchain()
-        print(f'Inserted in MongoDB: "{transaction_db.name}" - "{collection_name.n}"')
+        print(f'Inserted in MongoDB: "{transaction_db.name} - {collection_name.name}"')
         wait_time = 60
         print(f'Waiting {wait_time} seconds...')
         time.sleep(wait_time)
